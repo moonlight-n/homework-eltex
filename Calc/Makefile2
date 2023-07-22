@@ -1,0 +1,20 @@
+
+all: build main.o main 
+
+build:
+	gcc -fPIC add.c -c
+	gcc -fPIC sub.c -c 
+	gcc -fPIC div.c -c
+	gcc -fPIC mul.c -c
+	ar rc libcalc.a add.o sub.o div.o mul.o
+
+main.o:
+	gcc -c main.c -o main.o
+
+main:
+	gcc -o calculator main.o -L. -lcalc
+
+clear:
+	-rm *.o
+	-rm *.a
+	-rm calculator
